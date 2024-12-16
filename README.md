@@ -28,3 +28,7 @@ This is a simple console-based calculator application written in Java. It suppor
 
    ```bash
    javac Main.java Calculator.java
+5. Run the Main class to start the calculator program:
+
+   ```bash
+   java Main
