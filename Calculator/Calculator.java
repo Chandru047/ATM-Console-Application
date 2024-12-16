@@ -75,6 +75,11 @@ public class Calculator
         return Math.pow(getNum1(), getNum2());
     }
 
+    double mod(double a , double b)
+    {
+        return a % b ;
+    }
+
     void checker(double result)
     {
         if (result % 2 != 0)

@@ -9,8 +9,8 @@ class Main
 
         while (true)
         {
-            System.out.println("Enter your choice (+ - * / pow): ");
-            String choice = in.nextLine();
+            System.out.println("Enter your choice (+ - * / pow mod): ");
+            String choice = in.next();
 
             if(choice.equals("break"))
                 break;
@@ -46,6 +46,13 @@ class Main
                         result = calc.pow(calc.getNum1(), calc.getNum2());
                         calc.checker(result);
                         break;
+                    case "mod" :
+                        result = calc.mod(calc.getNum1() , calc.getNum2());
+                        calc.checker(result);
+                        break;
+                    default:
+                        System.out.println("Please enter a valid operation");
+
                 }
 
 
@@ -54,6 +61,11 @@ class Main
 
             else if (count == 3)
             {
+                if (choice.equals("/") || choice.equals("mod") || choice.equals("pow"))
+                {
+                    System.out.println("The selected operation does not support 3 operands");
+                    continue;
+                }
                 System.out.println("Enter your three numbers :");
                 calc.setNum1(in.nextDouble());
                 calc.setNum2(in.nextDouble());
@@ -73,14 +85,9 @@ class Main
                         result =(calc.multi(calc.getNum1(), calc.getNum2() , calc.getNum3()));
                         calc.checker(result);
                         break;
-                    case "/" :
-                        result =(calc.div(calc.getNum1(), calc.getNum2() ));
-                        calc.checker(result);
-                        break;
-                    case "pow" :
-                        result =(calc.pow(calc.getNum1(), calc.getNum2()));
-                        calc.checker(result);
-                        break;
+                    default:
+                        System.out.println("Please enter a valid operation");
+
 
                 }
             }
