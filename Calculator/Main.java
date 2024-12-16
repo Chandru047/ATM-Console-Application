@@ -9,10 +9,10 @@ class Main
 
         while (true)
         {
-            System.out.println("Enter your choice (+ - * / pow mod): ");
+            System.out.println("Enter an operation (+, -, *, /, pow, mod) or 'exit' to quit: ");
             String choice = in.next();
 
-            if(choice.equals("break"))
+            if(choice.equals("exit"))
                 break;
 
             System.out.println("No of operands (2 or 3): ");
@@ -27,28 +27,28 @@ class Main
                 switch (choice)
                 {
                     case "+" :
-                        result =(calc.add(calc.getNum1(), calc.getNum2() ));
-                        calc.checker(result);
+                        result =(Calculator.add(calc.getNum1(), calc.getNum2() ));
+                        Calculator.checker(result);
                         break;
                     case "-" :
-                        result =(calc.sub(calc.getNum1(), calc.getNum2() ));
-                        calc.checker(result);
+                        result =(Calculator.sub(calc.getNum1(), calc.getNum2() ));
+                        Calculator.checker(result);
                         break;
                     case "*" :
-                        result =(calc.multi(calc.getNum1(), calc.getNum2() ));
-                        calc.checker(result);
+                        result =(Calculator.multi(calc.getNum1(), calc.getNum2() ));
+                        Calculator.checker(result);
                         break;
                     case "/" :
-                        result =(calc.div(calc.getNum1(), calc.getNum2() ));
-                        calc.checker(result);
+                        result =(Calculator.div(calc.getNum1(), calc.getNum2() ));
+                        Calculator.checker(result);
                         break;
                     case "pow" :
-                        result = calc.pow(calc.getNum1(), calc.getNum2());
-                        calc.checker(result);
+                        result = Calculator.pow(calc.getNum1(), calc.getNum2());
+                        Calculator.checker(result);
                         break;
                     case "mod" :
-                        result = calc.mod(calc.getNum1() , calc.getNum2());
-                        calc.checker(result);
+                        result = Calculator.mod(calc.getNum1() , calc.getNum2());
+                        Calculator.checker(result);
                         break;
                     default:
                         System.out.println("Please enter a valid operation");
@@ -74,16 +74,16 @@ class Main
                 switch (choice)
                 {
                     case "+" :
-                        result =(calc.add(calc.getNum1(), calc.getNum2() , calc.getNum3()));
-                        calc.checker(result);
+                        result =(Calculator.add(calc.getNum1(), calc.getNum2() , calc.getNum3()));
+                        Calculator.checker(result);
                         break;
                     case "-" :
-                        result =(calc.sub(calc.getNum1(), calc.getNum2() , calc.getNum3()));
-                        calc.checker(result);
+                        result =(Calculator.sub(calc.getNum1(), calc.getNum2() , calc.getNum3()));
+                        Calculator.checker(result);
                         break;
                     case "*" :
-                        result =(calc.multi(calc.getNum1(), calc.getNum2() , calc.getNum3()));
-                        calc.checker(result);
+                        result =(Calculator.multi(calc.getNum1(), calc.getNum2() , calc.getNum3()));
+                        Calculator.checker(result);
                         break;
                     default:
                         System.out.println("Please enter a valid operation");

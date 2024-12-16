@@ -34,53 +34,58 @@ public class Calculator
         return num3;
     }
 
-    double add(double a, double b)
+    static double add(double a, double b)
     {
         return a + b;
     }
 
-    double add(double a, double b, double c)
+    static double add(double a, double b, double c)
     {
         return a + b + c;
     }
 
-    double sub(double a, double b)
+    static double sub(double a, double b)
     {
         return a - b;
     }
 
-    double sub(double a, double b, double c)
+    static double sub(double a, double b, double c)
     {
         return a - b - c;
     }
 
-    double multi(double a, double b)
+    static double multi(double a, double b)
     {
         return a * b;
     }
 
-    double multi(double a, double b, double c)
+    static double multi(double a, double b, double c)
     {
         return (a * b * c);
     }
 
 
-    double div(double a, double b)
+    static double div(double a, double b)
     {
+        if (b == 0)
+        {
+            System.out.println("Error: Division by zero");
+            return Double.NaN ;
+        }
         return a / b;
     }
 
-    double pow(double a, double b)
+    static double pow(double a, double b)
     {
-        return Math.pow(getNum1(), getNum2());
+        return Math.pow(a , b);
     }
 
-    double mod(double a , double b)
+    static double mod(double a , double b)
     {
         return a % b ;
     }
 
-    void checker(double result)
+    static void checker(double result)
     {
         if (result % 2 != 0)
         {
