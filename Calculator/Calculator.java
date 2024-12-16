@@ -87,7 +87,7 @@ public class Calculator
 
     static void checker(double result)
     {
-        if (result % 2 != 0)
+        if (result % 1 != 0)
         {
             System.out.println(result);
         }
