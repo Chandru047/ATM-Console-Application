@@ -21,5 +21,5 @@ This repository contains two console-based programs written in Java: a **Calcula
 ## Installation
 1. Clone this repository:
    ```bash
-   git clone https://github.com/your-username/console-programs-java.git
+   git clone https://github.com/Chandru047/Java-Console-Application.git
 
