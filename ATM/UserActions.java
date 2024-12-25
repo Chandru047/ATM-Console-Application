@@ -45,6 +45,46 @@ public class UserActions extends Actions
         }
     }
 
+    public static double performWithdraw(double amount , Notes notes , ArrayList<String> denomination)
+    {
+        long count = (long) (amount/Integer.parseInt(notes.getNote()));
+        if (Long.parseLong(notes.getNote()) < amount && count <=notes.getCount())
+        {
+            amount -= count*Integer.parseInt(notes.getNote());
+            notes.setCount(notes.getCount() - count);
+            String temp = "you got" + notes.getCount() +"of count" + count;
+            denomination.add(temp);
+
+        }
+    }
+
+    public static void withdrawCash(String id) throws CloneNotSupportedException
+    {
+        Scanner in = new Scanner(System.in);
+        var denominationList = new ArrayList<String>();
+        ArrayList<Notes> copy = new ArrayList<>();
+        for (Notes type : Atm.getNote())
+        {
+            copy.add(type.clone());
+        }
+        System.out.println("Enter the amount to withdraw:");
+        double amount =Double.parseDouble(in.nextLine());
+        while (amount !=0)
+        {
+            for (Notes notes : copy)
+            {
+                var noteType = notes.getNote();
+                switch (noteType)
+                {
+                    case "2000","500","200","100":
+                    {
+                        amount =performWithdraw(amount , notes , denominationList);
+                    }
+                }
+            }
+        }
+    }
+
     void withdraw(String id)
     {
         System.out.println("Enter the withdraw amount");
