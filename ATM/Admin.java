@@ -4,7 +4,11 @@ public class Admin {
     private static final double PIN = 1920;
     private String id ;
     private String pass;
-    private ArrayList<String> transactions;
+    private ArrayList<Transaction> transactionList;
+
+    public Admin() {
+        this.transactionList = new ArrayList<>();
+    }
 
     static double getPIN(){
         return PIN;
@@ -24,6 +28,15 @@ public class Admin {
     public void setPass(String pass)
     {
         this.pass = pass;
+    }
+
+    public ArrayList<Transaction> getTransactionList() {
+        return transactionList;
+    }
+
+
+    public void addTransaction(Transaction transaction) {
+        this.transactionList.add(transaction);
     }
 
 

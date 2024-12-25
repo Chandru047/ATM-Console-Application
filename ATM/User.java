@@ -1,8 +1,15 @@
+import java.util.ArrayList;
+
 public class User
 {
     private String id ;
     private String pass;
     private String balance;
+    private ArrayList<Transaction> transactionList;
+
+    public User() {
+        this.transactionList = new ArrayList<>();
+    }
 
     public String getId() {
         return id;
@@ -29,5 +36,14 @@ public class User
     public String getBalance()
     {
         return balance;
+    }
+
+    public ArrayList<Transaction> getTransactionList() {
+        return transactionList;
+    }
+
+
+    public void addTransaction(Transaction transaction) {
+        this.transactionList.add(transaction);
     }
 }

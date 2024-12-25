@@ -1,105 +1,60 @@
+import Notes.*;
+
 import java.util.ArrayList;
 import java.util.Scanner;
 
 public class AdminActions extends Actions
 {
-    static Scanner in ;
-    void options()
-    {
+    int login(String id) {
         Scanner in = new Scanner(System.in);
-        while (true)
-        {
-            System.out.println(" Add User \n Delete User  \n View all User\n View all Transaction \n Deposit \n exit");
-            String choice = in.nextLine();
-            if (choice.equalsIgnoreCase("exit"))
-            {
-                break;
-            }
-            else if (choice.equalsIgnoreCase("Add User") || choice.equalsIgnoreCase("Add"))
-            {
-                addUser();
-            }
-            else if (choice.equalsIgnoreCase("Delete User") || choice.equalsIgnoreCase("Delete"))
-            {
-                deleteUser();
-            }
-            else if (choice.equalsIgnoreCase("View all User") || choice.equalsIgnoreCase("View"))
-            {
-                viewUser();
-            }
-            else if (choice.equalsIgnoreCase("View all Transaction") || choice.equalsIgnoreCase("Transaction"))
-            {
-                viewTransaction();
-            }
-            else if (choice.equalsIgnoreCase("deposit"))
-            {
-                deposit();
-            }
 
-        }
+        while (true) {
+            int index = -1;
 
-    }
-
-    void login(String id)
-    {
-        while (true)
-        {
-            Scanner in = new Scanner(System.in);
-            int index = -1 ;
-            for (int i = 0; i < adminList.size(); i++)
-            {
-                if (adminList.get(i).getId().equals(id))
-                {
+            for (int i = 0; i < getAdminList().size(); i++) {
+                if (getAdminList().get(i).getId().equals(id)) {
                     index = i;
                     break;
                 }
             }
 
-            if (index != -1)
-            {
-
+            if (index != -1) {
                 System.out.println("Enter the password: ");
                 String password = in.nextLine();
 
-                if (adminList.get(index).getPass().equals(password))
-                {
+                if (getAdminList().get(index).getPass().equals(password)) {
                     System.out.println("Login successful!");
-                    options();
-                    break;
-                }
-                else
-                {
+                    Atm.adminOptions();
+                    return 1;
+                } else {
                     System.out.println("Invalid password. Try again.");
+                    return -1;
                 }
-            }
-            else
-            {
-
+            } else {
                 System.out.println("ID does not exist. Creating a new account...");
                 System.out.println("Enter the pin: ");
                 int enteredPin = in.nextInt();
                 in.nextLine();
 
-                if (enteredPin != Admin.getPIN())
-                {
+                if (enteredPin != Admin.getPIN()) {
                     System.out.println("Incorrect pin. Account creation failed.");
-                    continue;
+                    return 0;
                 }
+
                 Admin admin = new Admin();
                 admin.setId(id);
                 System.out.println("Enter the new password: ");
                 String newPassword = in.nextLine();
 
-                ArrayList<String> temp = new ArrayList<>();
                 admin.setPass(newPassword);
-                adminList.add(admin);
+                getAdminList().add(admin);
 
                 System.out.println("Account created successfully!");
-                break;
+                return 2;
             }
         }
-
     }
+
     void addUser()
     {
         Scanner in = new Scanner(System.in);
@@ -109,9 +64,9 @@ public class AdminActions extends Actions
         if (newId.contains("us")) {
 
 
-            for (int i = 0; i < userList.size(); i++)
+            for (int i = 0; i < getUserList().size(); i++)
             {
-                if (userList.get(i).getId().equals(newId))
+                if (getUserList().get(i).getId().equals(newId))
                 {
                     index = i;
                     break;
@@ -133,13 +88,12 @@ public class AdminActions extends Actions
                 System.out.println("Enter the Initial Balance: ");
                 String initialBalance = in.nextLine();
 
-                ArrayList<String> temp = new ArrayList<>();
                 User user = new User();
                 user.setId(newId);
                 user.setPass(newPassword);
                 user.setBalance(initialBalance);
-                userList.add(user);
-                System.out.println(userList);
+                getUserList().add(user);
+                System.out.println(getUserList());
 
                 System.out.println("Account created successfully!");
 
@@ -158,8 +112,8 @@ public class AdminActions extends Actions
         boolean exists = false;
         int Index = -1;
 
-        for (int i = 0; i < userList.size(); i++) {
-            if (userList.get(i).getId().equals(dAccount)) {
+        for (int i = 0; i < getUserList().size(); i++) {
+            if (getUserList().get(i).getId().equals(dAccount)) {
                 exists = true;
                 Index = i;
                 break;
@@ -167,7 +121,7 @@ public class AdminActions extends Actions
         }
 
         if (exists) {
-            userList.remove(Index);
+            getUserList().remove(Index);
             System.out.println("User Deleted");
         } else {
             System.out.println("User Does not exist");
@@ -176,34 +130,147 @@ public class AdminActions extends Actions
     }
 
     void viewUser() {
-        for (User user : userList) {
+        for (User user : getUserList()) {
             System.out.println(user.getId());
         }
     }
 
-    void deposit()
+    void deposit(String id)
     {
-        System.out.println("Amount available:" +getBankBalance());
-        Scanner in = new Scanner(System.in);
-        System.out.println("Enter the deposit amount: ");
-        double bankBalance = in.nextDouble();
-        System.out.println("Enter the no of 2000 note: ");
-        String twoThousand = in.nextLine();
-        note.add(twoThousand);
-        System.out.println("Enter the no of 500 note: ");
-        String fiveHundred = in.nextLine();
-        note.add(fiveHundred);
-        System.out.println("Enter the no of 50 note: ");
-        String fifty = in.nextLine();
-        note.add(fifty);
+        while (true)
+        {
 
-        double newBalance = bankBalance + getBankBalance();
-        setBankBalance(newBalance);
+            System.out.println("Amount available:" +getBankBalance());
+            Scanner in = new Scanner(System.in);
+            System.out.println("Enter the deposit amount: ");
+            String bankBalanceD = in.nextLine();
+            double bankBalance = Double.parseDouble(bankBalanceD);
+            System.out.println("Enter the no of 2000 note: ");
+            double twoThousand =Double.parseDouble(in.nextLine());
+
+            System.out.println("Enter the no of 500 note: ");
+            double fiveHundred =Double.parseDouble(in.nextLine());
+
+            System.out.println("Enter the no of 200 note: ");
+            double twoHundred =Double.parseDouble(in.nextLine());
+
+
+            System.out.println("Enter the no of 100 note: ");
+            double hundred =Double.parseDouble(in.nextLine());
+
+            double noteBalance = twoThousand*2000 + fiveHundred*500 + twoHundred*200 + hundred*100;
+            if (bankBalance == noteBalance)
+            {
+                double oldCount;
+                double newCount;
+                for (Notes notesHere:getNote())
+                {
+                    if (notesHere.getNote().equals("2000"))
+                    {
+                        oldCount = notesHere.getCount();
+                        newCount = oldCount+twoThousand;
+                        notesHere.setCount(newCount);
+                    }
+
+                    if (notesHere.getNote().equals("500"))
+                    {
+                        oldCount = notesHere.getCount();
+                        newCount = oldCount+fiveHundred;
+                        notesHere.setCount(newCount);
+                    }
+
+                    if (notesHere.getNote().equals("200"))
+                    {
+                        oldCount = notesHere.getCount();
+                        newCount = oldCount+twoHundred;
+                        notesHere.setCount(newCount);
+                    }
+
+                    if (notesHere.getNote().equals("100"))
+                    {
+                        oldCount = notesHere.getCount();
+                        newCount = oldCount+hundred;
+                        notesHere.setCount(newCount);
+                    }
+                }
+
+                double newBalance = bankBalance + getBankBalance();
+                setBankBalance(newBalance);
+                System.out.println("Deposit Sucessfull");
+                addTransactionToAdmin(bankBalance , id );
+                break;
+            }
+            else
+            {
+                System.out.println("Count doesn't match try again");
+                break;
+
+            }
+        }
 
     }
 
     void viewTransaction()
     {
-//        user.transaction();
+        System.out.println("Enter option (admin user)");
+        Scanner in = new Scanner(System.in);
+        String choice = in.nextLine();
+        if (choice.equals("user"))
+        {
+            for (int i = 0 ; i<getUserList().size(); i ++)
+            {
+                ArrayList<Transaction> transactionu = getUserList().get(i).getTransactionList();
+                if (transactionu.isEmpty())
+                {
+                    System.out.println("No Transaction Found");
+                }
+                else
+                {
+                    System.out.println("Transaction of the user: " + getUserList().get(i).getId());
+                    for (int j = 0 ; j<transactionu.size();  j++)
+                    {
+                        System.out.println(transactionu.get(j));
+                    }
+                }
+
+
+            }
+        }
+
+        if (choice.equals("admin"))
+        {
+            for (int i = 0 ; i<getAdminList().size(); i ++)
+            {
+                ArrayList<Transaction> transactiona = getAdminList().get(i).getTransactionList();
+                if (transactiona.isEmpty())
+                {
+                    System.out.println("No Transaction Found");
+                }
+                else
+                {
+                    System.out.println("Transaction of the admin: " + getAdminList().get(i).getId());
+                    for (int j = 0 ; j<transactiona.size();  j++)
+                    {
+                        System.out.println(transactiona.get(j));
+                    }
+                }
+
+
+            }
+        }
+
+    }
+
+    void addTransactionToAdmin(double amount , String id) {
+        for (int i = 0; i < getAdminList().size(); i++)
+        {
+            Admin admin = getAdminList().get(i);
+            if (admin.getId().equals(id))
+            {
+                Transaction transaction = new Transaction("Deposit", amount);
+                admin.addTransaction(transaction);
+                break;
+            }
+        }
     }
 }

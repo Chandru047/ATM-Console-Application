@@ -1,11 +1,11 @@
 public class Actions extends Atm
 {
-    void login(String id)
+    int login(String id)
     {
-
+        return -1 ;
     }
 
-    void deposit()
+    void deposit(String id)
     {
 
     }
