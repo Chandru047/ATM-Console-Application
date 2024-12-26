@@ -68,6 +68,7 @@ public class UserActions extends Actions
 
         System.out.println("Enter the amount to withdraw:");
         double amount = Double.parseDouble(in.nextLine());
+        double tempAmount = amount;
 
         if (amount <= 0) {
             System.out.println("Invalid amount. Please enter a positive value.");
@@ -96,7 +97,17 @@ public class UserActions extends Actions
                         }
                     }
                 }
-                if (amount == 0) {
+                if (amount == 0)
+                {
+                    for (int i = 0 ; i <Atm.getUserList().size(); i++)
+                    {
+                        if (Atm.getUserList().get(i).getId().equals(id))
+                        {
+                            double oldBalance = Double.parseDouble(Atm.getUserList().get(i).getBalance());
+                            String newBalance =Double.toString(oldBalance - tempAmount);
+                            Atm.getUserList().get(i).setBalance(newBalance);
+                        }
+                    }
                     break;
                 }
             }
@@ -136,7 +147,6 @@ public class UserActions extends Actions
 
                     continue;
                 }
-                Notes notes = new Notes();
                 System.out.println("Enter the no of 2000 note: ");
                 double twoThousand = Double.parseDouble(in.nextLine());
 
