@@ -4,7 +4,7 @@ public class Admin {
     private static final double PIN = 1920;
     private String id ;
     private String pass;
-    private ArrayList<Transaction> transactionList;
+    private final ArrayList<Transaction> transactionList;
 
     public Admin() {
         this.transactionList = new ArrayList<>();

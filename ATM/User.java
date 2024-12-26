@@ -5,7 +5,7 @@ public class User
     private String id ;
     private String pass;
     private String balance;
-    private ArrayList<Transaction> transactionList;
+    private final ArrayList<Transaction> transactionList;
 
     public User() {
         this.transactionList = new ArrayList<>();

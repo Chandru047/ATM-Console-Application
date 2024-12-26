@@ -11,8 +11,8 @@ public class AdminActions extends Actions
         while (true) {
             int index = -1;
 
-            for (int i = 0; i < getAdminList().size(); i++) {
-                if (getAdminList().get(i).getId().equals(id)) {
+            for (int i = 0; i < Atm.getAdminList().size(); i++) {
+                if (Atm.getAdminList().get(i).getId().equals(id)) {
                     index = i;
                     break;
                 }
@@ -22,7 +22,7 @@ public class AdminActions extends Actions
                 System.out.println("Enter the password: ");
                 String password = in.nextLine();
 
-                if (getAdminList().get(index).getPass().equals(password)) {
+                if (Atm.getAdminList().get(index).getPass().equals(password)) {
                     System.out.println("Login successful!");
                     Atm.adminOptions();
                     return 1;
@@ -47,7 +47,7 @@ public class AdminActions extends Actions
                 String newPassword = in.nextLine();
 
                 admin.setPass(newPassword);
-                getAdminList().add(admin);
+                Atm.getAdminList().add(admin);
 
                 System.out.println("Account created successfully!");
                 return 2;
@@ -64,9 +64,9 @@ public class AdminActions extends Actions
         if (newId.contains("us")) {
 
 
-            for (int i = 0; i < getUserList().size(); i++)
+            for (int i = 0; i < Atm.getUserList().size(); i++)
             {
-                if (getUserList().get(i).getId().equals(newId))
+                if (Atm.getUserList().get(i).getId().equals(newId))
                 {
                     index = i;
                     break;
@@ -92,8 +92,8 @@ public class AdminActions extends Actions
                 user.setId(newId);
                 user.setPass(newPassword);
                 user.setBalance(initialBalance);
-                getUserList().add(user);
-                System.out.println(getUserList());
+                Atm.getUserList().add(user);
+                System.out.println(Atm.getUserList());
 
                 System.out.println("Account created successfully!");
 
@@ -112,8 +112,8 @@ public class AdminActions extends Actions
         boolean exists = false;
         int Index = -1;
 
-        for (int i = 0; i < getUserList().size(); i++) {
-            if (getUserList().get(i).getId().equals(dAccount)) {
+        for (int i = 0; i < Atm.getUserList().size(); i++) {
+            if (Atm.getUserList().get(i).getId().equals(dAccount)) {
                 exists = true;
                 Index = i;
                 break;
@@ -121,7 +121,7 @@ public class AdminActions extends Actions
         }
 
         if (exists) {
-            getUserList().remove(Index);
+            Atm.getUserList().remove(Index);
             System.out.println("User Deleted");
         } else {
             System.out.println("User Does not exist");
@@ -130,7 +130,7 @@ public class AdminActions extends Actions
     }
 
     void viewUser() {
-        for (User user : getUserList()) {
+        for (User user : Atm.getUserList()) {
             System.out.println(user.getId());
         }
     }
@@ -140,7 +140,7 @@ public class AdminActions extends Actions
         while (true)
         {
 
-            System.out.println("Amount available:" +getBankBalance());
+            System.out.println("Amount available:" +Atm.getBankBalance());
             Scanner in = new Scanner(System.in);
             System.out.println("Enter the deposit amount: ");
             String bankBalanceD = in.nextLine();
@@ -163,7 +163,7 @@ public class AdminActions extends Actions
             {
                 double oldCount;
                 double newCount;
-                for (Notes notesHere:getNote())
+                for (Notes notesHere:Atm.getNote())
                 {
                     if (notesHere.getNote().equals("2000"))
                     {
@@ -194,8 +194,8 @@ public class AdminActions extends Actions
                     }
                 }
 
-                double newBalance = bankBalance + getBankBalance();
-                setBankBalance(newBalance);
+                double newBalance = bankBalance + Atm.getBankBalance();
+                Atm.setBankBalance(newBalance);
                 System.out.println("Deposit Sucessfull");
                 addTransactionToAdmin(bankBalance , id );
                 break;
@@ -217,16 +217,16 @@ public class AdminActions extends Actions
         String choice = in.nextLine();
         if (choice.equals("user"))
         {
-            for (int i = 0 ; i<getUserList().size(); i ++)
+            for (int i = 0 ; i<Atm.getUserList().size(); i ++)
             {
-                ArrayList<Transaction> transactionu = getUserList().get(i).getTransactionList();
+                ArrayList<Transaction> transactionu = Atm.getUserList().get(i).getTransactionList();
                 if (transactionu.isEmpty())
                 {
                     System.out.println("No Transaction Found");
                 }
                 else
                 {
-                    System.out.println("Transaction of the user: " + getUserList().get(i).getId());
+                    System.out.println("Transaction of the user: " + Atm.getUserList().get(i).getId());
                     for (int j = 0 ; j<transactionu.size();  j++)
                     {
                         System.out.println(transactionu.get(j));
@@ -239,16 +239,16 @@ public class AdminActions extends Actions
 
         if (choice.equals("admin"))
         {
-            for (int i = 0 ; i<getAdminList().size(); i ++)
+            for (int i = 0 ; i<Atm.getAdminList().size(); i ++)
             {
-                ArrayList<Transaction> transactiona = getAdminList().get(i).getTransactionList();
+                ArrayList<Transaction> transactiona = Atm.getAdminList().get(i).getTransactionList();
                 if (transactiona.isEmpty())
                 {
                     System.out.println("No Transaction Found");
                 }
                 else
                 {
-                    System.out.println("Transaction of the admin: " + getAdminList().get(i).getId());
+                    System.out.println("Transaction of the admin: " + Atm.getAdminList().get(i).getId());
                     for (int j = 0 ; j<transactiona.size();  j++)
                     {
                         System.out.println(transactiona.get(j));
@@ -262,9 +262,9 @@ public class AdminActions extends Actions
     }
 
     void addTransactionToAdmin(double amount , String id) {
-        for (int i = 0; i < getAdminList().size(); i++)
+        for (int i = 0; i < Atm.getAdminList().size(); i++)
         {
-            Admin admin = getAdminList().get(i);
+            Admin admin = Atm.getAdminList().get(i);
             if (admin.getId().equals(id))
             {
                 Transaction transaction = new Transaction("Deposit", amount);

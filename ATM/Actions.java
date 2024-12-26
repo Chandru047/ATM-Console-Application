@@ -1,7 +1,6 @@
-public class Actions extends Atm
+public class Actions
 {
-    int login(String id)
-    {
+    int login(String id) throws CloneNotSupportedException {
         return -1 ;
     }
 

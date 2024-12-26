@@ -7,8 +7,5 @@ public class FiveHundred extends Notes
         super.setNote(note);
         super.setCount(count);
     }
-    public FiveHundred()
-    {
 
-    }
 }

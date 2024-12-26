@@ -7,14 +7,16 @@ import java.util.Scanner;
 public class Atm
 {
     static double bankBalance ;
-    private static ArrayList<Notes> note = new ArrayList<>(
-            Arrays.asList(
+    private static ArrayList<Notes> note = new ArrayList<>
+            (
+            Arrays.asList
+                    (
                     new TwoThousand("2000", 0),
                     new FiveHundred("500", 0),
                     new TwoHundred("200", 0),
                     new Hundred("100", 0)
-            )
-    );
+                    )
+            );
     private static final ArrayList<Admin> adminList = new ArrayList<>();
     private static final ArrayList<User> userList = new ArrayList<>();
     private static String id ;
@@ -29,13 +31,13 @@ public class Atm
         note = temp;
     }
 
-    ArrayList<Admin> getAdminList()
+    static ArrayList<Admin> getAdminList()
     {
         new TwoHundred("200", 10);
         return adminList;
     }
 
-    ArrayList<User> getUserList()
+    static ArrayList<User> getUserList()
     {
         return userList;
     }
@@ -55,8 +57,7 @@ public class Atm
     {
         return id;
     }
-    void start()
-    {
+    void start() throws CloneNotSupportedException {
         while (true)
         {
             Scanner in = new Scanner(System.in);
@@ -150,8 +151,7 @@ public class Atm
         }
 
     }
-    static void userOptions()
-    {
+    static void userOptions() throws CloneNotSupportedException {
         while (true)
         {
             UserActions user = new UserActions();
@@ -162,7 +162,7 @@ public class Atm
                 user.balance(getId() );
             }
             else if (choice.equalsIgnoreCase("Withdraw")) {
-                user.withdraw(getId());
+                user.withdrawCash(getId());
             }
             else if (choice.equalsIgnoreCase("exit"))
             {

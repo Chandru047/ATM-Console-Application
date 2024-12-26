@@ -7,8 +7,5 @@ public class Hundred extends Notes
         super.setNote(note);
         super.setCount(count);
     }
-    public Hundred()
-    {
 
-    }
 }

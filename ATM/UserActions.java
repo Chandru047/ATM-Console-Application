@@ -6,12 +6,12 @@ import java.util.Scanner;
 public class UserActions extends Actions
 {
 
-    int login(String id) {
+    int login(String id) throws CloneNotSupportedException {
         Scanner in = new Scanner(System.in);
         int index = -1;
 
-        for (int i = 0; i < getUserList().size(); i++) {
-            if (getUserList().get(i).getId().equals(id)) {
+        for (int i = 0; i < Atm.getUserList().size(); i++) {
+            if (Atm.getUserList().get(i).getId().equals(id)) {
                 index = i;
                 break;
             }
@@ -21,7 +21,7 @@ public class UserActions extends Actions
             System.out.println("Enter the Password:");
             String pass = in.nextLine();
 
-            if (getUserList().get(index).getPass().equals(pass)) {
+            if (Atm.getUserList().get(index).getPass().equals(pass)) {
                 System.out.println("Login Successful");
                 Atm.userOptions();
                 return 1;
@@ -37,89 +37,85 @@ public class UserActions extends Actions
 
     void balance(String id)
     {
-        for (int i = 0; i < getUserList().size(); i++) {
-            if (getUserList().get(i).getId().equals(id)) {
-                System.out.println(getUserList().get(i).getBalance());
+        for (int i = 0; i < Atm.getUserList().size(); i++) {
+            if (Atm.getUserList().get(i).getId().equals(id)) {
+                System.out.println(Atm.getUserList().get(i).getBalance());
             }
 
         }
     }
 
-    public static double performWithdraw(double amount , Notes notes , ArrayList<String> denomination)
-    {
-        long count = (long) (amount/Integer.parseInt(notes.getNote()));
-        if (Long.parseLong(notes.getNote()) < amount && count <=notes.getCount())
-        {
-            amount -= count*Integer.parseInt(notes.getNote());
+    public double performWithdraw(double amount, Notes notes, ArrayList<String> denomination) {
+        int noteValue = Integer.parseInt(notes.getNote());
+        long count = (long) (amount / noteValue);
+        if (noteValue <= amount && count <= notes.getCount()) {
+            amount -= count * noteValue;
             notes.setCount(notes.getCount() - count);
-            String temp = "you got" + notes.getCount() +"of count" + count;
-            denomination.add(temp);
-
+            denomination.add("You got " + count + " notes of " + noteValue);
+            return amount;
         }
+        return amount;
     }
 
-    public static void withdrawCash(String id) throws CloneNotSupportedException
-    {
+    public void withdrawCash(String id) throws CloneNotSupportedException {
         Scanner in = new Scanner(System.in);
         var denominationList = new ArrayList<String>();
         ArrayList<Notes> copy = new ArrayList<>();
-        for (Notes type : Atm.getNote())
-        {
+
+        for (Notes type : Atm.getNote()) {
             copy.add(type.clone());
         }
+
         System.out.println("Enter the amount to withdraw:");
-        double amount =Double.parseDouble(in.nextLine());
-        while (amount !=0)
+        double amount = Double.parseDouble(in.nextLine());
+
+        if (amount <= 0) {
+            System.out.println("Invalid amount. Please enter a positive value.");
+            return;
+        }
+        for (int i = 0 ; i <Atm.getUserList().size(); i++)
         {
-            for (Notes notes : copy)
+            if (Atm.getUserList().get(i).getId().equals(id))
             {
-                var noteType = notes.getNote();
-                switch (noteType)
+                if (amount >Double.parseDouble(Atm.getUserList().get(i).getBalance()))
                 {
-                    case "2000","500","200","100":
-                    {
-                        amount =performWithdraw(amount , notes , denominationList);
+                    System.out.println("Insufficient balance");
+                    return;
+                }
+            }
+        }
+
+
+        while (amount > 0) {
+            for (Notes notes : copy) {
+                switch (notes.getNote()) {
+                    case "2000", "500", "200", "100" : {
+                        double remaining = performWithdraw(amount, notes, denominationList);
+                        if (remaining < amount) {
+                            amount = remaining;
+                        }
                     }
                 }
-            }
-        }
-    }
-
-    void withdraw(String id)
-    {
-        System.out.println("Enter the withdraw amount");
-        Scanner in =new Scanner(System.in);
-        double withdrawAmount = in.nextDouble();
-        for (int i = 0; i < getUserList().size(); i++)
-        {
-            if (getUserList().get(i).getId().equals(id))
-            {
-                String oldbalance = getUserList().get(i).getBalance();
-                double typeBlance = Double.parseDouble(oldbalance);
-                if (withdrawAmount > typeBlance || withdrawAmount > getBankBalance())
-                {
-                    System.out.println("Insufficient Fund , Try Again");
-                    continue;
+                if (amount == 0) {
+                    break;
                 }
-                else if (!(withdrawAmount % 100 == 0))
-                {
-                    System.out.println("Enter a round amount");
-                    continue;
-                }
-                double newBalance = typeBlance - withdrawAmount ;
-                String srtBalance = Double.toString(newBalance);
-                getUserList().get(i).setBalance(srtBalance);
-                System.out.println("Amount withdraw sucessfull");
-                addTransactionToUser("Withdraw", withdrawAmount , id);
-                break;
-
-
             }
-
 
         }
 
+        if (amount == 0) {
+            Atm.setNote(copy);
+
+            for (var temp : denominationList) {
+                System.out.println(temp);
+            }
+        } else {
+            System.out.println("Unable to withdraw the full amount. Please try another value.");
+
+        }
     }
+
+
 
     void deposit(String id)
     {
@@ -127,11 +123,11 @@ public class UserActions extends Actions
         Scanner in =new Scanner(System.in);
         String depositAmountS = in.nextLine();
         double depositAmount = Double.parseDouble(depositAmountS);
-        for (int i = 0; i < getUserList().size(); i++)
+        for (int i = 0; i < Atm.getUserList().size(); i++)
         {
-            if (getUserList().get(i).getId().equals(id))
+            if (Atm.getUserList().get(i).getId().equals(id))
             {
-                String oldbalance = getUserList().get(i).getBalance();
+                String oldbalance = Atm.getUserList().get(i).getBalance();
                 double typeBalance = Double.parseDouble(oldbalance);
                 if (depositAmount <= 0)
                 {
@@ -158,7 +154,7 @@ public class UserActions extends Actions
                 {
                     double oldCount;
                     double newCount;
-                    for (Notes notesHere:getNote())
+                    for (Notes notesHere:Atm.getNote())
                     {
                         if (notesHere.getNote().equals("2000"))
                         {
@@ -194,11 +190,11 @@ public class UserActions extends Actions
 
                     double newBalance = typeBalance + depositAmount ;
                     String srtBalance = Double.toString(newBalance);
-                    getUserList().get(i).setBalance(srtBalance);
+                    Atm.getUserList().get(i).setBalance(srtBalance);
                     System.out.println("Amount deposited sucessfully");
                     addTransactionToUser("Deposit", depositAmount , id);
-                    double newBankBalance = getBankBalance() + depositAmount;
-                    setBankBalance(newBankBalance);
+                    double newBankBalance = Atm.getBankBalance() + depositAmount;
+                    Atm.setBankBalance(newBankBalance);
 
                     System.out.println("Deposit Sucessfull");
                 }
@@ -216,16 +212,16 @@ public class UserActions extends Actions
         Scanner in = new Scanner(System.in);
         System.out.println("verify to change the password");
         String tempPass = in.nextLine();
-        for (int i = 0 ; i<getUserList().size(); i ++)
+        for (int i = 0 ; i<Atm.getUserList().size(); i ++)
         {
-            if (getUserList().get(i).getId().equals(id))
+            if (Atm.getUserList().get(i).getId().equals(id))
             {
-                String currentPass = getUserList().get(i).getPass();
+                String currentPass = Atm.getUserList().get(i).getPass();
                 if (tempPass.equals(currentPass))
                 {
                     System.out.println("Enter the new pass:");
                     String newPass = in.nextLine();
-                    getUserList().get(i).setPass(newPass);
+                    Atm.getUserList().get(i).setPass(newPass);
                     System.out.println("Password Updated Successfully");
 
                 }
@@ -239,9 +235,9 @@ public class UserActions extends Actions
     }
 
     void addTransactionToUser(String type, double amount , String id) {
-        for (int i = 0; i < getUserList().size(); i++)
+        for (int i = 0; i < Atm.getUserList().size(); i++)
         {
-            User user = getUserList().get(i);
+            User user = Atm.getUserList().get(i);
             if (user.getId().equals(id))
             {
                 Transaction transaction = new Transaction(type, amount);
@@ -252,9 +248,9 @@ public class UserActions extends Actions
     }
 
     public void viewTransactions(String id) {
-        for (int i = 0; i < getUserList().size(); i++)
+        for (int i = 0; i < Atm.getUserList().size(); i++)
         {
-            User user = getUserList().get(i);
+            User user = Atm.getUserList().get(i);
 
             if (user.getId().equals(id))
             {
@@ -265,8 +261,8 @@ public class UserActions extends Actions
                 } else {
                     System.out.println("Transaction History for user " + id + ":");
 
-                    for (int j = 0; j < transactions.size(); j++) {
-                        System.out.println(transactions.get(j));
+                    for (Transaction transaction : transactions) {
+                        System.out.println(transaction);
                     }
                 }
                 break;

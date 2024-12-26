@@ -1,7 +1,7 @@
 package Notes;
 
 public class Notes
-{
+implements Cloneable{
     private String note;
     private double count;
 
@@ -23,5 +23,10 @@ public class Notes
     public void setCount(double count)
     {
         this.count = count;
+    }
+
+    @Override
+    public Notes clone() throws CloneNotSupportedException {
+        return (Notes) super.clone();
     }
 }

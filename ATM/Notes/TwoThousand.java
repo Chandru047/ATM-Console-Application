@@ -8,8 +8,5 @@ public class TwoThousand extends Notes
         super.setCount(count);
     }
 
-    public TwoThousand()
-    {
 
-    }
 }
