@@ -106,9 +106,10 @@ public class UserActions extends Actions
                             double oldBalance = Double.parseDouble(Atm.getUserList().get(i).getBalance());
                             String newBalance =Double.toString(oldBalance - tempAmount);
                             Atm.getUserList().get(i).setBalance(newBalance);
+                            break;
                         }
                     }
-                    break;
+
                 }
             }
 

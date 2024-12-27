@@ -131,7 +131,8 @@ public class AdminActions extends Actions
 
     void viewUser() {
         for (User user : Atm.getUserList()) {
-            System.out.println(user.getId());
+            System.out.print(user.getId());
+            System.out.println(" | " + user.getBalance());
         }
     }
 
