@@ -63,13 +63,13 @@ public class AdminActions extends Actions
     {
         System.out.println("Enter the location:");
         String location = in.nextLine();
-        if (BookMyShow.getlocationAndMovie().containsKey(location))
+        if (BookMyShow.getlocationAndTheatre().containsKey(location))
         {
             System.out.println("Location already exists");
         }
         else
         {
-            BookMyShow.getlocationAndMovie().put(location , new ArrayList<Theatre>());
+            BookMyShow.getlocationAndTheatre().put(location , new ArrayList<Theatre>());
             System.out.println("Location added Successfully");
         }
     }
@@ -78,15 +78,53 @@ public class AdminActions extends Actions
     {
         System.out.println("Enter the Location : ");
         String location = in.nextLine();
-        if (!BookMyShow.getlocationAndMovie().containsKey(location))
+        if (!BookMyShow.getlocationAndTheatre().containsKey(location))
         {
             System.out.println("Enter Does not exist");
             System.out.println("Please enter an valid Location");
             return;
         }
-
+        ArrayList<Screens> theatreScreen = new ArrayList<>();
         System.out.println("Enter the name of the Theatre");
         String theatreName = in.nextLine();
-        BookMyShow.getlocationAndMovie().put(location , new ArrayList<Theatre>());
+        if (!(BookMyShow.getlocationAndTheatre().containsValue(theatreName)))
+        {
+            System.out.println("Enter the  Screen count :");
+            int screenCount = Integer.parseInt(in.nextLine());
+            while (screenCount !=0)
+            {
+                System.out.println("Enter the name of the Screen " + screenCount);
+                String screenName = in.nextLine();
+                System.out.println("Enter the number of Seats in Screen" + screenName);
+                String numberSeats = in.nextLine();
+                System.out.println("Enter the Screen Grid (eg:2*8*2)");
+                String screenGrid = in.nextLine();
+                var grid = Utilities.generateSeatingPatterns(numberSeats , screenGrid);
+                theatreScreen.add(new Screens(screenName , numberSeats , grid));
+                screenCount -- ;
+            }
+            System.out.println("Theatre added Successfully");
+            BookMyShow.getlocationAndTheatre().get(location).add(new Theatre(theatreName , theatreScreen));
+        }
+
+        else
+        {
+            System.out.println("Theatre already Exists !!!");
+        }
+
+    }
+
+    static void addMovie()
+    {
+        System.out.println("Enter the location of the Theatre: ");
+        String location = in.nextLine();
+        if ((BookMyShow.getlocationAndTheatre().containsKey(location)))
+        {
+            System.out.println(BookMyShow.getlocationAndTheatre().get(location).);
+        }
+        else
+        {
+            System.out.println("Location not Available");
+        }
     }
 }

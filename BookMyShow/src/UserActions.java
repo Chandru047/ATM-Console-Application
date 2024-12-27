@@ -15,7 +15,9 @@ public class UserActions extends Actions
         user.setname(name);
         System.out.println("Enter your Location:");
         String location = in.nextLine();
+        System.out.println("Account Created Sucessfully");
         user.setLocation(location);
+        BookMyShow.getUserList().add(user);
 
     }
 

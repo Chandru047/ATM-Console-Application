@@ -7,11 +7,12 @@ public class BookMyShow
     static Scanner in = new Scanner(System.in);
     private static final ArrayList<Admin> adminList= new ArrayList<>();
     private static final ArrayList<User> userList = new ArrayList<>();
-    private static final HashMap<String , ArrayList<Theatre>> locationAndMovie = new HashMap<>();
+    private static final HashMap<String , ArrayList<Theatre>> locationAndTheatre = new HashMap<>();
 
-    static HashMap<String, ArrayList<Theatre>> getlocationAndMovie()
+
+    static HashMap<String, ArrayList<Theatre>> getlocationAndTheatre()
     {
-        return locationAndMovie;
+        return locationAndTheatre;
     }
 
     static ArrayList<Admin> getAdminList()
@@ -76,21 +77,32 @@ public class BookMyShow
 
     public static void adminOptions()
     {
-        System.out.println("-------------------------");
-        System.out.println("       Admin Options     ");
-        System.out.println("-------------------------");
-        System.out.println("Enter your choice: \n1.Add Location \n2.Add Theatre");
-        String choice = in.nextLine();
-        switch (choice)
+       loop: while (true)
         {
-            case "1" :
-                AdminActions.addLocation();
-            case "2" :
-                AdminActions.addTheatre();
+            System.out.println("-------------------------");
+            System.out.println("       Admin Options     ");
+            System.out.println("-------------------------");
+            System.out.println("Enter your choice: \n1.Add Location \n2.Add Theatre \n3.Add Movie \n4.Exit");
+            String choice = in.nextLine();
+            switch (choice)
+            {
+                case "1" :
+                    AdminActions.addLocation();
+                    break;
+                case "2" :
+                    AdminActions.addTheatre();
+                    break;
+                case "3" :
+                    AdminActions.addMovie();
+                    break ;
+                case "4" :
+                    break loop;
 
 
 
+            }
         }
+
 
     }
 

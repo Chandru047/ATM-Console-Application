@@ -1,17 +1,21 @@
+import java.util.ArrayList;
+
 public class Theatre
 {
-    private final String theatreName;
-    Theatre(String theatreName)
+    private static String theatreName;
+    ArrayList<Screens> screen;
+    Theatre(String theatreName , ArrayList<Screens> screen)
     {
         this.theatreName = theatreName;
+        this.screen = screen ;
     }
 
-    String getTheatreName()
+    public static String getTheatreName()
     {
         return theatreName;
     }
 
-    String setTheatreName()
+    static String setTheatreName()
     {
         return theatreName;
     }
