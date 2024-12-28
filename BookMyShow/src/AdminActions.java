@@ -1,9 +1,13 @@
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.LocalTime;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Scanner;
 
-public class AdminActions extends Actions
-{
+public class AdminActions extends Actions {
     static Scanner in = new Scanner(System.in);
+
     String login(String id) {
         Scanner in = new Scanner(System.in);
 
@@ -25,22 +29,17 @@ public class AdminActions extends Actions
                     System.out.println("Login successful!");
                     BookMyShow.adminOptions();
                     return "Success";
-                }
-                else
-                {
+                } else {
                     System.out.println("Invalid password. Try again.");
                     return "Invalid";
                 }
-            }
-            else
-            {
+            } else {
                 System.out.println("ID does not exist. Creating a new account...");
                 System.out.println("Enter the pin: ");
                 int enteredPin = Integer.parseInt(in.nextLine());
 
 
-                if (enteredPin != Admin.getPIN())
-                {
+                if (enteredPin != Admin.getPIN()) {
                     System.out.println("Incorrect pin. Account creation failed.");
                     return "Invalid";
                 }
@@ -59,27 +58,21 @@ public class AdminActions extends Actions
         }
     }
 
-    static void addLocation()
-    {
+    static void addLocation() {
         System.out.println("Enter the location:");
         String location = in.nextLine();
-        if (BookMyShow.getlocationAndTheatre().containsKey(location))
-        {
+        if (BookMyShow.getLocationAndTheatre().containsKey(location)) {
             System.out.println("Location already exists");
-        }
-        else
-        {
-            BookMyShow.getlocationAndTheatre().put(location , new ArrayList<Theatre>());
+        } else {
+            BookMyShow.getLocationAndTheatre().put(location, new ArrayList<TheatrePOJO>());
             System.out.println("Location added Successfully");
         }
     }
 
-    static void addTheatre()
-    {
+    static void addTheatre() {
         System.out.println("Enter the Location : ");
         String location = in.nextLine();
-        if (!BookMyShow.getlocationAndTheatre().containsKey(location))
-        {
+        if (!BookMyShow.getLocationAndTheatre().containsKey(location)) {
             System.out.println("Enter Does not exist");
             System.out.println("Please enter an valid Location");
             return;
@@ -87,44 +80,86 @@ public class AdminActions extends Actions
         ArrayList<Screens> theatreScreen = new ArrayList<>();
         System.out.println("Enter the name of the Theatre");
         String theatreName = in.nextLine();
-        if (!(BookMyShow.getlocationAndTheatre().containsValue(theatreName)))
-        {
+        if (!(BookMyShow.getLocationAndTheatre().containsValue(theatreName))) {
             System.out.println("Enter the  Screen count :");
             int screenCount = Integer.parseInt(in.nextLine());
-            while (screenCount !=0)
-            {
+            while (screenCount != 0) {
                 System.out.println("Enter the name of the Screen " + screenCount);
                 String screenName = in.nextLine();
                 System.out.println("Enter the number of Seats in Screen" + screenName);
                 String numberSeats = in.nextLine();
                 System.out.println("Enter the Screen Grid (eg:2*8*2)");
                 String screenGrid = in.nextLine();
-                var grid = Utilities.generateSeatingPatterns(numberSeats , screenGrid);
-                theatreScreen.add(new Screens(screenName , numberSeats , grid));
-                screenCount -- ;
+                var grid = Utilities.generateSeatingPatterns(numberSeats, screenGrid);
+                theatreScreen.add(new Screens(screenName, numberSeats, grid));
+                screenCount--;
             }
             System.out.println("Theatre added Successfully");
-            BookMyShow.getlocationAndTheatre().get(location).add(new Theatre(theatreName , theatreScreen));
-        }
-
-        else
-        {
+            BookMyShow.getLocationAndTheatre().get(location).add(new TheatrePOJO(theatreName, theatreScreen));
+        } else {
             System.out.println("Theatre already Exists !!!");
         }
 
     }
 
-    static void addMovie()
-    {
+    static void addMovie() {
         System.out.println("Enter the location of the Theatre: ");
         String location = in.nextLine();
-        if ((BookMyShow.getlocationAndTheatre().containsKey(location)))
+        ArrayList<MoviePOJO> movie = BookMyShow.getLocationAndMovie().get(location);
+        if (movie == null)
         {
-            System.out.println(BookMyShow.getlocationAndTheatre().get(location).);
+            movie = new ArrayList<>();
         }
-        else
-        {
-            System.out.println("Location not Available");
+
+        if (!BookMyShow.getLocationAndTheatre().containsKey(location)) {
+            System.out.println("Location not available.");
+            return;
         }
+
+
+        ArrayList<TheatrePOJO> theatres = BookMyShow.getLocationAndTheatre().get(location);
+        System.out.println("Theatres at " + location + ":");
+        for (TheatrePOJO theatre : theatres) {
+            System.out.println("- " + theatre.getTheatreName());
+        }
+
+
+        System.out.println("Select from the available theatres:");
+        String selectedTheatre = in.nextLine();
+
+        for (TheatrePOJO theatre : theatres) {
+            if (!(theatre.getTheatreName().equals(selectedTheatre))) {
+                System.out.println("Please enter a valid Theatre");
+            } else {
+                System.out.println("Available screens in theatre - " + selectedTheatre);
+
+                for (var screen : theatre.getScreen()) {
+                    System.out.println(screen.getScreenName());
+                }
+
+            }
+
+            System.out.println("Select the Screen for the Film: ");
+            String selectedScreen = in.nextLine();
+            if (theatre.getTheatreName().equals(selectedTheatre))
+            {
+                System.out.println("Enter the Movie Name: ");
+                String movieName = in.nextLine();
+                System.out.println("Enter the Date for the movie :");
+                String dateS = in.nextLine();
+                LocalDate date = java.time.LocalDate.parse(dateS, BookMyShow.getDateFormatter());
+                System.out.println("Enter the Start Time (24 Hrs) :");
+                String startTimeS = in.nextLine();
+                LocalTime startTime = LocalTime.parse(startTimeS ,BookMyShow.getTimeFormatter());
+                System.out.println("Enter the duration of the movie : ");
+                long duration = Long.parseLong(in.nextLine());
+                LocalTime endTime = startTime.plusMinutes(duration).plusMinutes(30);
+                movie.add(new MoviePOJO(movieName));
+                System.out.println("Movie added Sucessfully");
+
+            }
+
+        }
+        BookMyShow.getLocationAndMovie().put(location , movie );
     }
 }

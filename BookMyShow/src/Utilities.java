@@ -17,7 +17,7 @@ public class Utilities
 
         if (seatCount % sum == 0)
         {
-            var seatArrangment = Screens.getSeatingArrangement();
+            var seatArrangment = new HashMap<Character , ArrayList<String>>();
             char charA = 'A' ;
 
             while (seatCount > 0)

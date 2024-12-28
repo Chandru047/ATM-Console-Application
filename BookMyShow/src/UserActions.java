@@ -1,3 +1,4 @@
+import java.util.ArrayList;
 import java.util.Scanner;
 
 public class UserActions extends Actions
@@ -15,7 +16,7 @@ public class UserActions extends Actions
         user.setname(name);
         System.out.println("Enter your Location:");
         String location = in.nextLine();
-        System.out.println("Account Created Sucessfully");
+        System.out.println("Account Created Successfully");
         user.setLocation(location);
         BookMyShow.getUserList().add(user);
 
@@ -37,5 +38,36 @@ public class UserActions extends Actions
         }
         System.out.println("User does not exist ....    Creating new account");
         return "not_Exist";
+    }
+
+    public static void displayMovie(String id)
+    {
+        ArrayList<MoviePOJO> theatresS = null;
+        System.out.println("Movies Screening in your location .....");
+        String location = "";
+        for (User user  : BookMyShow.getUserList())
+        {
+            
+            if (user.getId().equals(id))
+            {
+                
+                location = user.getLocation();
+                ArrayList<MoviePOJO> theatres = BookMyShow.getLocationAndMovie().get(location);
+                theatresS = theatres ;
+
+            }
+        }
+
+        if (!BookMyShow.getLocationAndTheatre().containsKey(location)) {
+            System.out.println("Location not available.");
+        }
+        if (theatresS == null)
+        {
+            theatresS = new ArrayList<>();
+        }
+        for (MoviePOJO theatre : theatresS)
+        {
+            System.out.println(theatre.getMovieName());
+        }
     }
 }

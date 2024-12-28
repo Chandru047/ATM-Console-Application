@@ -1,3 +1,4 @@
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Scanner;
@@ -7,12 +8,21 @@ public class BookMyShow
     static Scanner in = new Scanner(System.in);
     private static final ArrayList<Admin> adminList= new ArrayList<>();
     private static final ArrayList<User> userList = new ArrayList<>();
-    private static final HashMap<String , ArrayList<Theatre>> locationAndTheatre = new HashMap<>();
+    private static final HashMap<String , ArrayList<TheatrePOJO>> locationAndTheatre = new HashMap<>();
+    private static final HashMap<String , ArrayList<MoviePOJO>> locationAndMovie = new HashMap<>();
+    static DateTimeFormatter timeFormatter = DateTimeFormatter.ofPattern("HH:mm");
+    private static DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern("dd-MM-yyyy");
+    private static String currentId;
 
 
-    static HashMap<String, ArrayList<Theatre>> getlocationAndTheatre()
+    static HashMap<String, ArrayList<TheatrePOJO>> getLocationAndTheatre()
     {
         return locationAndTheatre;
+    }
+
+    static HashMap<String, ArrayList<MoviePOJO>> getLocationAndMovie()
+    {
+        return locationAndMovie;
     }
 
     static ArrayList<Admin> getAdminList()
@@ -25,6 +35,24 @@ public class BookMyShow
         return userList;
     }
 
+    public static DateTimeFormatter getDateFormatter() {
+        return dateFormatter;
+    }
+
+    public static DateTimeFormatter getTimeFormatter() {
+        return timeFormatter ;
+    }
+
+    public static String getCurrentId()
+    {
+        return currentId ;
+    }
+    public void setCurrentId(String id)
+    {
+        this.currentId = id ;
+    }
+
+
     void start()
     {
         System.out.println("----------------------------------------");
@@ -36,6 +64,7 @@ public class BookMyShow
         {
             System.out.println("Enter the Username: ");
             String input = in.nextLine();
+            setCurrentId(input);
 
             if (input.contains("ad"))
             {
@@ -108,6 +137,16 @@ public class BookMyShow
 
     public static void userOptions()
     {
-        System.out.println("User Options ......");
+        System.out.println("-------------------------");
+        System.out.println("       User Options     ");
+        System.out.println("-------------------------");
+        System.out.println("Enter your choice: \n1.Display Movies ");
+        String choice = in.nextLine();
+        switch (choice)
+        {
+            case "1" :
+                UserActions.displayMovie(getCurrentId());
+        }
+
     }
 }
