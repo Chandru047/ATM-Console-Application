@@ -1,4 +1,4 @@
-# Console-Based Project: Calculator, ATM Programs, and BookMyShow (Java)
+# Console-Based Project: Calculator, ATM Program, and BookMyShow (Java)
 
 This repository contains three console-based programs written in Java: a **Calculator** for performing arithmetic operations, an **ATM** for simulating basic banking functionalities, and a **BookMyShow** program for managing movie ticket bookings. These programs demonstrate the use of Java's core concepts in a simple and interactive way.
 
