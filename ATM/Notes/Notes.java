@@ -1,7 +1,7 @@
 package Notes;
 
-public class Notes
-implements Cloneable{
+public class Notes implements Cloneable
+{
     private String note;
     private double count;
 
