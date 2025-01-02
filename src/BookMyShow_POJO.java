@@ -6,6 +6,7 @@ public class BookMyShow_POJO
     private static final ArrayList<Admin_POJO> adminList= new ArrayList<>();
     private static final ArrayList<User_POJO> userList = new ArrayList<>();
     private static ArrayList<Movie> movie = new ArrayList<>();
+    private static ArrayList<Theatre_POJO> theatre = new ArrayList<>();
     private static final DateTimeFormatter timeFormatter = DateTimeFormatter.ofPattern("HH:mm");
     private static final DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern("dd-MM-yyyy");
     private static String currentId;
@@ -46,5 +47,13 @@ public class BookMyShow_POJO
 
     public static void setMovie(ArrayList<Movie> movie) {
         BookMyShow_POJO.movie = movie;
+    }
+
+    public static ArrayList<Theatre_POJO> getTheatre() {
+        return theatre;
+    }
+
+    public static void setTheatre(ArrayList<Theatre_POJO> theatre) {
+        BookMyShow_POJO.theatre = theatre;
     }
 }

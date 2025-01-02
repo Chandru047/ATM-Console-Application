@@ -124,12 +124,12 @@ public class UserActions
 
     }
 
-    static void changeLocation(User_POJO currentUser)
+    static void changeLocation(User_POJO currentUser) // method to change the location of the user
     {
         System.out.println("Your Current Location :" + currentUser.getLocation());
 
         System.out.println("Available Locations ... ");
-        for(Movie movie :BookMyShow_POJO.getMovie())
+        for(Movie movie :BookMyShow_POJO.getMovie()) // for loop to display all the available location
         {
             System.out.println(" - " + movie.getLocation());
         }
@@ -138,13 +138,13 @@ public class UserActions
         String newLocation = in.nextLine();
 
 
-        currentUser.setLocation(newLocation);
+        currentUser.setLocation(newLocation); // setting the location of the curent user
         System.out.println("Location Changed Successfully ");
 
 
     }
 
-    static LocalDate changeDate()
+    static LocalDate changeDate() // method to change the date
     {
         System.out.println("Enter the Preferred Date :");
         LocalDate updatedDate = java.time.LocalDate.parse(in.nextLine(), BookMyShow_POJO.getDateFormatter());

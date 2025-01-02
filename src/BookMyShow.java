@@ -59,7 +59,7 @@ public class BookMyShow
        loop : while (true)
        {
 
-           System.out.println("Enter your choice: \n1.Add Movie \n2.View all Movie \n2.Exit");
+           System.out.println("Enter your choice: \n1.Add Movie \n2.View all Movie \n3.Add Theatre \n4.Exit");
            String choice = in.nextLine().trim();
            switch (choice)
            {
@@ -68,7 +68,11 @@ public class BookMyShow
                    break;
                case "2":
                    AdminActions.viewAllMovies();
+                   break;
                case "3":
+                   AdminActions.addTheatre();
+                   break;
+               case "4":
                    break loop;
 
            }
