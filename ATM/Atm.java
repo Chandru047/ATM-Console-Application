@@ -1,3 +1,7 @@
+import NoteList.FiveHundred;
+import NoteList.Hundred;
+import NoteList.TwoHundred;
+import NoteList.TwoThousand;
 import Notes.*;
 
 import java.util.ArrayList;
@@ -15,10 +19,8 @@ public class Atm
                     new TwoHundred("200", 0),
                     new Hundred("100", 0)
                     )
-            );
-    private static final ArrayList<Admin> adminList = new ArrayList<>();
-    private static final ArrayList<User> userList = new ArrayList<>();
-    private static String id ;
+            ); // Create an arrayList of notes and create objects for all the notes with default value
+    private static final ArrayList<Account> customer = new ArrayList<>(); // Arraylist of Customer containing all the user and admin
 
     static ArrayList<Notes> getNote()
     {
@@ -30,15 +32,15 @@ public class Atm
         note = temp;
     }
 
-    static ArrayList<Admin> getAdminList()
+    static ArrayList<Account> getAdminList()
     {
         new TwoHundred("200", 10);
-        return adminList;
+        return customer;
     }
 
-    static ArrayList<User> getUserList()
+    static ArrayList<Account> getUserList()
     {
-        return userList;
+        return customer;
     }
     static void setBankBalance(double balance)
     {
@@ -48,13 +50,4 @@ public class Atm
     {
         return bankBalance;
     }
-    static void setId(String Id)
-    {
-        id = Id;
-    }
-    public static String getId()
-    {
-        return id;
-    }
-
 }

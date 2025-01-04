@@ -9,33 +9,40 @@ public class ATMActions {
             // Prompt user to enter their ID
             System.out.println("Enter the ID: ");
             String id = in.nextLine();
-            Atm.setId(id);
+
 
             // Handle admin actions
-            if (Atm.getId().contains("ad")) {
-                AdminActions adminAction = new AdminActions();
-                Admin loggedInAdmin = adminAction.login(Atm.getId());
+            if (id.contains("ad")) {
+                AdminActions adminAction = new AdminActions(); // create an object for adminActions
+                Admin loggedInAdmin = (Admin) adminAction.login(id); //  call the login method in the AdminActions
 
-                if (loggedInAdmin != null) {
+                if (loggedInAdmin != null)
+                {
                     // Successful login or account creation
                     System.out.println("Welcome, " + loggedInAdmin.getId() + "!");
                     adminOptions(loggedInAdmin); // Open admin options menu
-                } else {
+                }
+                else
+                {
                     // Login or account creation failed
                     System.out.println("Login or account creation failed.");
                 }
             }
 
             // Handle user actions
-            else if (Atm.getId().contains("us")) {
-                UserActions userAction = new UserActions();
-                User loggedInUser = userAction.login(Atm.getId());
+            else if (id.contains("us"))
+            {
+                UserActions userAction = new UserActions(); // create an object for the userActions
+                User loggedInUser = (User) userAction.login(id); // call the loginMethod in UserActions
 
-                if (loggedInUser != null) {
+                if (loggedInUser != null) // if the return is not null then call the userOptions
+                {
                     // Successful login
                     System.out.println("Welcome, " + loggedInUser.getId() + "!");
                     userOptions(loggedInUser); // Open user options menu
-                } else {
+                }
+                else // if null then print failed
+                {
                     // Login failed
                     System.out.println("Login failed.");
                 }
@@ -55,9 +62,10 @@ public class ATMActions {
 
     // Admin options menu
     static void adminOptions(Admin currentAdmin) {
-        AdminActions admin = new AdminActions();
+        AdminActions admin = new AdminActions(); // create an object for the AdminActions
 
-        while (true) {
+        while (true)
+        {
             // Display admin menu options
             System.out.println("Add User \nDelete User \nView all Users \nView all Transactions \nDeposit \nexit");
             String choice = in.nextLine();
@@ -79,8 +87,10 @@ public class ATMActions {
     }
 
     // User options menu
-    static void userOptions(User currentUser) throws CloneNotSupportedException {
-        while (true) {
+    static void userOptions(User currentUser) throws CloneNotSupportedException
+    {
+        while (true)
+        {
             UserActions user = new UserActions();
 
             // Display user menu options

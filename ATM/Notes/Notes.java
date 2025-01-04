@@ -5,6 +5,14 @@ public class Notes implements Cloneable
     private String note;
     private double count;
 
+    protected Notes(String note , double count)
+    {
+        this.count=count;
+        this.note=note;
+    }
+
+
+
     public String getNote()
     {
         return note;
@@ -26,7 +34,8 @@ public class Notes implements Cloneable
     }
 
     @Override
-    public Notes clone() throws CloneNotSupportedException {
-        return (Notes) super.clone();
+    public Object clone() throws CloneNotSupportedException
+    {
+        return  super.clone();
     }
 }

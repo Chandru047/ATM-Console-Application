@@ -1,31 +1,10 @@
-import java.util.ArrayList;
-
-public class User
+public class User extends Account
 {
-    private String id ;
-    private String pass;
     private String balance;
-    private final ArrayList<Transaction> transactionList;
-
-    public User() {
-        this.transactionList = new ArrayList<>();
-    }
-
-    public String getId() {
-        return id;
-    }
-    public void setId(String id) {
-
-        this.id = id;
-    }
-
-
-    public String getPass() {
-        return pass;
-    }
-    public void setPass(String pass)
+    public User(String id , String pass)
     {
-        this.pass = pass;
+        super(id , pass);// pass the id and pass to the Accounts
+
     }
 
     public void setBalance(String balance)
@@ -38,12 +17,4 @@ public class User
         return balance;
     }
 
-    public ArrayList<Transaction> getTransactionList() {
-        return transactionList;
-    }
-
-
-    public void addTransaction(Transaction transaction) {
-        this.transactionList.add(transaction);
-    }
 }

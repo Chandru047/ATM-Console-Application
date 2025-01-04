@@ -10,7 +10,8 @@ public class Transaction {
 
 
     @Override
-    public String toString() {
+    public String toString() // override the toString Method in Object
+    {
         return "Transaction [Type=" + type + ", Amount=" + amount + "]";
     }
 }
