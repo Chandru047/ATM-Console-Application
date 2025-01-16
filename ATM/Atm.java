@@ -34,7 +34,6 @@ public class Atm
 
     static ArrayList<Account> getAdminList()
     {
-        new TwoHundred("200", 10);
         return customer;
     }
 
