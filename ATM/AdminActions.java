@@ -112,7 +112,7 @@ public class AdminActions
                 System.out.println("Account created successfully!");
             }
         }
-        else // fi login not successful
+        else // if login not successful
         {
             System.out.println("Invalid user");
         }

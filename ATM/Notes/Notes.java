@@ -2,9 +2,10 @@ package Notes;
 
 public class Notes implements Cloneable
 {
-    private String note;
-    private double count;
+    private String note;// variable to store the type of the note ( eg:2000 or 500 )
+    private double count; // variable to store the count of the note
 
+    //Constructor
     protected Notes(String note , double count)
     {
         this.count=count;
@@ -12,15 +13,11 @@ public class Notes implements Cloneable
     }
 
 
+    //Getters and Setters
 
     public String getNote()
     {
         return note;
-    }
-
-    public void setNote(String note)
-    {
-        this.note = note;
     }
 
     public double getCount()
@@ -36,6 +33,6 @@ public class Notes implements Cloneable
     @Override
     public Object clone() throws CloneNotSupportedException
     {
-        return  super.clone();
+        return super.clone();
     }
 }

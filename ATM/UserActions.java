@@ -93,7 +93,7 @@ public class UserActions
             return;
         }
 
-        if (amount > Double.parseDouble(currentUser.getBalance())) // if teh withdraw amount is greater than balance than not possible
+        if (amount > Double.parseDouble(currentUser.getBalance())) // if the withdraw amount is greater than balance than not possible
         {
             System.out.println("Insufficient balance");
             return;
@@ -241,7 +241,8 @@ public class UserActions
     }
 
     // Adds a transaction to the user's transaction list
-    void addTransactionToUser(String type, double amount, User currentUser) {
+    void addTransactionToUser(String type, double amount, User currentUser)
+    {
         Transaction transaction = new Transaction(type, amount);
         currentUser.addTransaction(transaction);
     }

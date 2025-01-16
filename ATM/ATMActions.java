@@ -1,11 +1,12 @@
 import java.util.Scanner;
 
 public class ATMActions {
-    static Scanner in = new Scanner(System.in);
+    static Scanner in = new Scanner(System.in); //static Scanner
 
     // Entry point for the ATM system
     static void start() throws CloneNotSupportedException {
-        while (true) {
+        while (true)
+        {
             // Prompt user to enter their ID
             System.out.println("Enter the ID: ");
             String id = in.nextLine();

@@ -1,7 +1,8 @@
 public class Transaction {
-    private String type;
-    private double amount;
+    private String type; // variable to store the type of the transaction ( eg:deposit or withdraw )
+    private double amount;// variable to store the amount
 
+    //Constructor
     public Transaction(String type, double amount) {
         this.type = type;
         this.amount = amount;

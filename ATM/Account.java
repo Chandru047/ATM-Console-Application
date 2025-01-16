@@ -2,10 +2,11 @@ import java.util.ArrayList;
 
 public class Account
 {
-    private String id;
-    private String pass;
-    private final ArrayList<Transaction> transactionList;
+    private String id; // variable to store the id
+    private String pass; // variable to store the pass
+    private  ArrayList<Transaction> transactionList; // ArrayList to store the Transactions
 
+    //Constructor
     public Account(String id , String pass)
     {
         this.id = id ;
@@ -13,12 +14,10 @@ public class Account
         this.transactionList = new ArrayList<>();
     }
 
+    //Getters and Setters
+
     public String getId() {
         return id;
-    }
-
-    public void setId(String id) {
-        this.id = id;
     }
 
     public String getPass() {

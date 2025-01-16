@@ -9,7 +9,7 @@ import java.util.Arrays;
 
 public class Atm
 {
-    static double bankBalance ;
+    static double bankBalance ; // variable to store the bank balance
     private static ArrayList<Notes> note = new ArrayList<>
             (
             Arrays.asList
@@ -19,9 +19,11 @@ public class Atm
                     new TwoHundred("200", 0),
                     new Hundred("100", 0)
                     )
-            ); // Create an arrayList of notes and create objects for all the notes with default value
+            ); // ArrayList of notes and created objects for all the notes with default value
     private static final ArrayList<Account> customer = new ArrayList<>(); // Arraylist of Customer containing all the user and admin
 
+
+    //Getters and Setters
     static ArrayList<Notes> getNote()
     {
         return note;
@@ -41,10 +43,12 @@ public class Atm
     {
         return customer;
     }
+
     static void setBankBalance(double balance)
     {
         bankBalance = balance;
     }
+
     static double getBankBalance()
     {
         return bankBalance;
