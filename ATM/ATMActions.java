@@ -4,7 +4,7 @@ public class ATMActions {
     static Scanner in = new Scanner(System.in);
 
     // Entry point for the ATM system
-    void start() throws CloneNotSupportedException {
+    static void start() throws CloneNotSupportedException {
         while (true) {
             // Prompt user to enter their ID
             System.out.println("Enter the ID: ");
