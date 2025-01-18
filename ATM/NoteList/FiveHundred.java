@@ -1,6 +1,6 @@
-package NoteList;
+package ATM.NoteList;
 
-import Notes.Notes;
+import ATM.Notes.Notes;
 
 public class FiveHundred extends Notes
 {

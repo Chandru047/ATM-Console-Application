@@ -1,3 +1,5 @@
+package ATM;
+
 import java.util.Scanner;
 
 public class ATMActions {
@@ -15,7 +17,7 @@ public class ATMActions {
             // Handle admin actions
             if (id.contains("ad")) {
                 AdminActions adminAction = new AdminActions(); // create an object for adminActions
-                Admin loggedInAdmin = (Admin) adminAction.login(id); //  call the login method in the AdminActions
+                Admin loggedInAdmin = (Admin) adminAction.login(id); //  call the login method in the ATM.AdminActions
 
                 if (loggedInAdmin != null)
                 {
@@ -34,7 +36,7 @@ public class ATMActions {
             else if (id.contains("us"))
             {
                 UserActions userAction = new UserActions(); // create an object for the userActions
-                User loggedInUser = (User) userAction.login(id); // call the loginMethod in UserActions
+                User loggedInUser = (User) userAction.login(id); // call the loginMethod in ATM.UserActions
 
                 if (loggedInUser != null) // if the return is not null then call the userOptions
                 {
@@ -61,9 +63,9 @@ public class ATMActions {
         }
     }
 
-    // Admin options menu
+    // ATM.Admin options menu
     static void adminOptions(Admin currentAdmin) {
-        AdminActions admin = new AdminActions(); // create an object for the AdminActions
+        AdminActions admin = new AdminActions(); // create an object for the ATM.AdminActions
 
         while (true)
         {
@@ -87,7 +89,7 @@ public class ATMActions {
         }
     }
 
-    // User options menu
+    // ATM.User options menu
     static void userOptions(User currentUser) throws CloneNotSupportedException
     {
         while (true)

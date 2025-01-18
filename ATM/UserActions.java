@@ -1,18 +1,20 @@
-import Notes.*;
+package ATM;
+
+import ATM.Notes.*;
 
 import java.util.ArrayList;
 import java.util.Scanner;
 
-public class UserActions
+public class UserActions implements ATM.Actions.UserActions
 {
     // Handles user login process
-    Account login(String id) throws CloneNotSupportedException {
+   public Account login(String id) throws CloneNotSupportedException {
         Scanner in = new Scanner(System.in);
 
         // Find the user by ID
         for (Account user : Atm.getUserList()) //go through the List
         {
-            if (user instanceof User)// check if user is a User type
+            if (user instanceof User)// check if user is a ATM.User type
             {
                 if (user.getId().equals(id)) // if the id matches then proceed to get pass
                 {
@@ -24,7 +26,7 @@ public class UserActions
                     {
                         System.out.println("Login Successful");
                         ATMActions.userOptions((User) user); // Redirect to user options menu
-                        return user; // Return the User object on success
+                        return user; // Return the ATM.User object on success
                     }
                     else
                     {
@@ -42,7 +44,7 @@ public class UserActions
     }
 
     // Displays the current balance of the user
-    void balance(User currentUser) {
+    public void balance(User currentUser) {
         System.out.println(currentUser.getBalance());
     }
 
@@ -74,7 +76,7 @@ public class UserActions
     {
         Scanner in = new Scanner(System.in);
         ArrayList<String> denominationList = new ArrayList<String>(); // create an arrayList of String
-        ArrayList<Notes> copy = new ArrayList<>(); // create an arrayList of Notes
+        ArrayList<Notes> copy = new ArrayList<>(); // create an arrayList of ATM.Notes
 
         // Clone the notes list to calculate denominations without affecting the original
         for (Notes type : Atm.getNote()) // go through all the notes
@@ -134,6 +136,8 @@ public class UserActions
             {
                 System.out.println(temp);
             }
+
+            addTransactionToUser("Deposit",amount, currentUser);
         }
         else // Withdraw failed
         {
@@ -142,14 +146,14 @@ public class UserActions
     }
 
     // Handles deposit process
-    void deposit(User currentUser) {
+   public void deposit(Account currentUser) {
         System.out.println("Enter the Deposit amount");
         Scanner in = new Scanner(System.in);
         String depositAmountS = in.nextLine();
         double depositAmount = Double.parseDouble(depositAmountS);
 
-
-        String oldbalance = currentUser.getBalance();
+        User user = (User) currentUser;
+        String oldbalance = user.getBalance();
         double typeBalance = Double.parseDouble(oldbalance);
 
         // Validate deposit amount
@@ -209,9 +213,9 @@ public class UserActions
             // Update user balance and ATM bank balance
             double newBalance = typeBalance + depositAmount;
             String srtBalance = Double.toString(newBalance);
-            currentUser.setBalance(srtBalance);
+            user.setBalance(srtBalance);
             System.out.println("Amount deposited successfully");
-            addTransactionToUser("Deposit", depositAmount, currentUser);
+            addTransactionToUser("Deposit", depositAmount, user);
             double newBankBalance = Atm.getBankBalance() + depositAmount;
             Atm.setBankBalance(newBankBalance);
 
@@ -220,7 +224,7 @@ public class UserActions
     }
 
     // Allows the user to change their password
-    void changePass(User currentUser)
+    public void changePass(User currentUser)
     {
         Scanner in = new Scanner(System.in);
         System.out.println("Verify to change the password"); // get input to verify
@@ -241,7 +245,7 @@ public class UserActions
     }
 
     // Adds a transaction to the user's transaction list
-    void addTransactionToUser(String type, double amount, User currentUser)
+    public void addTransactionToUser(String type, double amount, User currentUser)
     {
         Transaction transaction = new Transaction(type, amount);
         currentUser.addTransaction(transaction);
@@ -250,7 +254,7 @@ public class UserActions
     // Displays the transaction history of the user
     public void viewTransactions(User currentUser)
     {
-        ArrayList<Transaction> transactions = currentUser.getTransactionList(); // create an ArrayList of transaction and store all the users Transaction
+        ArrayList<Transaction> transactions = currentUser.getTransactionList(); // create an ArrayList of transaction and store all the users ATM.Transaction
 
         if (transactions.isEmpty())  // if empty then print empty
         {

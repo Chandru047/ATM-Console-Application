@@ -1,8 +1,10 @@
-import NoteList.FiveHundred;
-import NoteList.Hundred;
-import NoteList.TwoHundred;
-import NoteList.TwoThousand;
-import Notes.*;
+package ATM;
+
+import ATM.NoteList.FiveHundred;
+import ATM.NoteList.Hundred;
+import ATM.NoteList.TwoHundred;
+import ATM.NoteList.TwoThousand;
+import ATM.Notes.*;
 
 import java.util.ArrayList;
 import java.util.Arrays;

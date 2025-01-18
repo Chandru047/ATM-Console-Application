@@ -1,11 +1,13 @@
-import Notes.*;
+package ATM;
+
+import ATM.Notes.*;
 import java.util.ArrayList;
 import java.util.Scanner;
 
-public class AdminActions
+public class AdminActions implements ATM.Actions.AdminActions
 {
     // Method to log in as an admin
-    Account login(String id) {
+    public Account login(String id) {
         Scanner in = new Scanner(System.in);
 
         while (true) // infinite loop for the login process
@@ -15,7 +17,7 @@ public class AdminActions
             // Search for admin by ID
             for (Account admin : Atm.getAdminList()) // for loop to get all the CustomerList
             {
-                if (admin instanceof Admin) // check if admin is an Admin type
+                if (admin instanceof Admin) // check if admin is an ATM.Admin type
                 {
                     if (admin.getId().equals(id))  // if the id matches store the admin object in the foundAdmin
                     {
@@ -54,7 +56,7 @@ public class AdminActions
 
                 if (enteredPin != Admin.getPIN())
                 {
-                    System.out.println("Incorrect pin. Account creation failed.");
+                    System.out.println("Incorrect pin. ATM.Account creation failed.");
                     return null; // if the pin does not match then return null
                 }
 
@@ -62,7 +64,7 @@ public class AdminActions
 
                 System.out.println("Enter the new password: ");
                 String newPassword = in.nextLine();
-                Account admin = new Admin(id , newPassword); // create object of admin with reference Account
+                Account admin = new Admin(id , newPassword); // create object of admin with reference ATM.Account
                 Atm.getAdminList().add(admin); // add the admin object to the list
 
                 System.out.println("Account created successfully!");
@@ -72,7 +74,7 @@ public class AdminActions
     }
 
     // Method to add a new user
-    void addUser()
+    public void addUser()
     {
         Scanner in = new Scanner(System.in);
         int index = -1;
@@ -106,7 +108,7 @@ public class AdminActions
                 System.out.println("Enter the Initial Balance: ");
                 String initialBalance = in.nextLine();
 
-                Account user = new User(newId , newPassword); // create the user object with Account ref
+                Account user = new User(newId , newPassword); // create the user object with ATM.Account ref
                 ((User) user).setBalance(initialBalance); // set balance for the user
                 Atm.getUserList().add(user); // add the user object to the List
                 System.out.println("Account created successfully!");
@@ -119,7 +121,7 @@ public class AdminActions
     }
 
     // Method to delete an existing user
-    void deleteUser()
+    public void deleteUser()
     {
         System.out.println("Enter the User ID to Delete");
         Scanner in = new Scanner(System.in);
@@ -150,10 +152,10 @@ public class AdminActions
     }
 
     // Method to view all users and their balances
-    void viewUser() {
+    public void viewUser() {
         for (Account user : Atm.getUserList()) // get all the object in the list
         {
-            if (user instanceof User) // check if the object is User
+            if (user instanceof User) // check if the object is ATM.User
             {
                 System.out.print(user.getId());
                 System.out.println(" | " + ((User) user).getBalance()); // if user then get the balance and cast it to UserType
@@ -163,7 +165,7 @@ public class AdminActions
     }
 
     // Method to deposit cash into the ATM
-    void deposit(Admin currentAdmin)
+    public void deposit(Account currentAdmin)
     {
         while (true)
         {
@@ -195,7 +197,7 @@ public class AdminActions
                 double newCount;
 
                 // Update the note counts in the ATM
-                for (Notes notesHere : Atm.getNote())  // go through all the Notes Object
+                for (Notes notesHere : Atm.getNote())  // go through all the ATM.Notes Object
                 {
                     if (notesHere.getNote().equals("2000"))
                     {
@@ -238,7 +240,7 @@ public class AdminActions
     }
 
     // Method to view transactions for users or admins
-    void viewTransaction()
+    public void viewTransaction()
     {
         System.out.println("Enter option (admin user)");
         Scanner in = new Scanner(System.in);
@@ -248,7 +250,7 @@ public class AdminActions
         {
             for (Account user : Atm.getUserList()) // go through the List
             {
-                ArrayList<Transaction> transactionu = user.getTransactionList(); // create an arrayList of Transaction
+                ArrayList<Transaction> transactionu = user.getTransactionList(); // create an arrayList of ATM.Transaction
 
                 if (transactionu.isEmpty()) // if the transaction is empty then print empty
                 {
@@ -287,13 +289,13 @@ public class AdminActions
     }
 
     // Helper Method to add a transaction to the admin's transaction list
-    void addTransactionToAdmin(double amount, String id) {
+    public void addTransactionToAdmin(double amount, String id) {
         for (Account admin : Atm.getAdminList())  // go through the list
         {
             if (admin.getId().equals(id))
             {
                 Transaction transaction = new Transaction("Deposit", amount); //  create new transaction
-                admin.addTransaction(transaction); // add transaction to the teh Transaction List
+                admin.addTransaction(transaction); // add transaction to the teh ATM.Transaction List
                 break;
             }
         }

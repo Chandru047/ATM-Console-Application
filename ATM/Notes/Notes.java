@@ -1,4 +1,4 @@
-package Notes;
+package ATM.Notes;
 
 public class Notes implements Cloneable
 {

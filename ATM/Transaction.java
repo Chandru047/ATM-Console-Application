@@ -1,3 +1,5 @@
+package ATM;
+
 public class Transaction {
     private String type; // variable to store the type of the transaction ( eg:deposit or withdraw )
     private double amount;// variable to store the amount

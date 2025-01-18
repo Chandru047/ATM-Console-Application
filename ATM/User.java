@@ -1,3 +1,5 @@
+package ATM;
+
 public class User extends Account
 {
     private String balance; // variable to store the balance of the user

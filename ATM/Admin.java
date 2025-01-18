@@ -1,3 +1,5 @@
+package ATM;
+
 public class Admin extends Account
 {
     private static final double PIN = 1920; // variable to store the default pin
