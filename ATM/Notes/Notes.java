@@ -1,6 +1,6 @@
 package ATM.Notes;
 
-public class Notes implements Cloneable
+public abstract Notes implements Cloneable
 {
     private String note;// variable to store the type of the note ( eg:2000 or 500 )
     private double count; // variable to store the count of the note
