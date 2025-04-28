@@ -1,7 +1,7 @@
 # Banking Transaction System
 
 ## Overview
-A comprehensive banking system designed to handle accounts, transactions, and denomination management. The system provides functionality for both administrators and customers to manage accounts and perform various financial transactions.
+A comprehensive banking system designed to handle accounts, transactions, and denomination management. The system provides functionality for both administrators and customers to manage accounts and perform various financial transactions
 
 ## System Architecture Diagram
 
