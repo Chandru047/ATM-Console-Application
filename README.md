@@ -65,7 +65,7 @@ A comprehensive banking system designed to handle accounts, transactions, and de
   - Two Hundred (₹200)
   - Hundred (₹100)
 - Note count tracking
-- Total amount calculation
+- Total amount calculation.
 
 ## Technical Specifications
 
